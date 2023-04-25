@@ -149,11 +149,42 @@
     <div class="search_user_info" v-if="task[1] == 1">
       <div v-for="item in users" :key="item.STT">
         <div v-if="item.STT == curUser">
-          <div>{{ item.name }}</div>
-          <div>{{ item.phone }}</div>
-          <div>{{ item.email }}</div>
-          <div>{{ item.date }}</div>
-          <div>{{ item.score }}</div>
+          <div class="detail_content" v-if="task[1] == 1">
+            <div class="user_header">
+              <div class="user_avatar">
+                <img src="../assets/image/avatar.png" alt="" />
+              </div>
+              <div class="user_state">
+              <div class="username">{{ item.name }}</div>
+            </div>
+        </div>
+        <div class="info_field">
+          <div class="field_item">
+            <div class="field_icon">
+              <img src="../assets/image/mail.png" alt="" />
+            </div>
+            <div class="field_name">{{ item.email }}</div>
+          </div>
+          <div class="field_item">
+            <div class="field_icon">
+              <img src="../assets/image/Card.png" alt="" />
+            </div>
+            <div class="field_name">{{ item.score }}</div>
+          </div>
+          <div class="field_item">
+            <div class="field_icon">
+              <img src="../assets/image/Phone.png" alt="" />
+            </div>
+            <div class="field_name">{{ item.phone }}</div>
+          </div>
+          <div class="field_item">
+            <div class="field_icon">
+              <img src="../assets/image/fa-regular_address-book.png" alt="" />
+            </div>
+            <div class="field_name">Địa chỉ</div>
+          </div>
+        </div>
+      </div>
         </div>
       </div>
     </div>
