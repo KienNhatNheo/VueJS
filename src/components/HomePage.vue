@@ -97,6 +97,18 @@
           </div>
         </div>
       </div>
+      <div class="searchBox" v-if="task[1] == 1">
+        <div class="searchBox_input">
+          <img src="../assets/image/search.png" alt="">
+          <input v-model="searchNum" type="text" class="search_input"/>
+        </div>
+        <div class="resultText">Kết quả tìm kiếm danh bạ</div>
+        <div class="searchResult" v-for="item in users" :key="item.STT">
+          <div v-if="item.phone == searchNum">
+            {{ item.name }}
+          </div>
+        </div>
+      </div>
     </div>
     <div class="list_user" v-if="task[0] == 1">
       <div class="add_user_but" @click="isAdd = 1">Thêm người dùng</div>
@@ -133,6 +145,9 @@
           </tbody>
         </table>
       </div>
+    </div>
+    <div class="search_user_info" v-if="task[1] == 1">
+    
     </div>
   </div>
   <div class="add_user_form" v-if="isAdd == 1">
@@ -196,6 +211,7 @@ export default {
       task: [1, 0],
       list_task: [1, 0],
       isAdd: 0,
+      searchNum: "",
       newUser:{
         name:"",
         phone:"",
@@ -234,7 +250,7 @@ export default {
     },
     addUser(){
       // this.users.push({STT:17,name:this.newUser.name,phone:this.newUser.phone,email:this.newUser.email,date:'jidiuahsdu',score:192})
-      axios.post('https://api.npoint.io/553f7ce1ce02b0193a0a', {
+      axios.post('https://api.npoint.io/cabc3cd41304f9512ff2', {
         STT: this.users.STT,
         name: this.users.name,
         phone: this.users.phone,
@@ -255,7 +271,7 @@ export default {
   mounted() {
     var self = this;
     axios
-      .get("https://api.npoint.io/553f7ce1ce02b0193a0a")
+      .get("https://api.npoint.io/cabc3cd41304f9512ff2")
       .then((response) => {
         self.users = response.data;
       })
@@ -266,6 +282,37 @@ export default {
 };
 </script>
 <style scoped>
+.searchResult{
+  margin-left:5%;
+  margin-top:25px;
+  margin-bottom:5px;
+  color: orange;
+}
+.resultText{
+  margin-left:5%;
+  margin-top:15px;
+}
+.search_input {
+  border: none;
+  width: 100%;
+  outline: none;
+  font-size: 15px;
+}
+.searchBox>.searchBox_input>img {
+  width:20px;
+  height:20px;
+  margin-right:10px;
+}
+.searchBox>.searchBox_input {
+  display: flex;
+  border: 1px solid black;
+  border-radius: 5px;
+  width:90%;
+  margin-left:5%;
+  margin-top:15px;
+  padding:5px;
+}
+
 .add_user_field>div>div>input {
   margin-bottom: 11px;
   height: 1.5rem;
