@@ -99,8 +99,8 @@
       </div>
       <div class="searchBox" v-if="task[1] == 1">
         <div class="searchBox_input">
-          <img src="../assets/image/search.png" alt="">
-          <input v-model="searchNum" type="text" class="search_input"/>
+          <img src="../assets/image/search.png" alt="" />
+          <input v-model="searchNum" type="text" class="search_input" />
         </div>
         <div class="resultText">Kết quả tìm kiếm danh bạ</div>
         <div class="searchResult" v-for="item in users" :key="item.STT">
@@ -155,36 +155,39 @@
                 <img src="../assets/image/avatar.png" alt="" />
               </div>
               <div class="user_state">
-              <div class="username">{{ item.name }}</div>
+                <div class="username">{{ item.name }}</div>
+              </div>
             </div>
-        </div>
-        <div class="info_field">
-          <div class="field_item">
-            <div class="field_icon">
-              <img src="../assets/image/mail.png" alt="" />
+            <div class="info_field">
+              <div class="field_item">
+                <div class="field_icon">
+                  <img src="../assets/image/mail.png" alt="" />
+                </div>
+                <div class="field_name">{{ item.email }}</div>
+              </div>
+              <div class="field_item">
+                <div class="field_icon">
+                  <img src="../assets/image/Card.png" alt="" />
+                </div>
+                <div class="field_name">{{ item.score }}</div>
+              </div>
+              <div class="field_item">
+                <div class="field_icon">
+                  <img src="../assets/image/Phone.png" alt="" />
+                </div>
+                <div class="field_name">{{ item.phone }}</div>
+              </div>
+              <div class="field_item">
+                <div class="field_icon">
+                  <img
+                    src="../assets/image/fa-regular_address-book.png"
+                    alt=""
+                  />
+                </div>
+                <div class="field_name">Địa chỉ</div>
+              </div>
             </div>
-            <div class="field_name">{{ item.email }}</div>
           </div>
-          <div class="field_item">
-            <div class="field_icon">
-              <img src="../assets/image/Card.png" alt="" />
-            </div>
-            <div class="field_name">{{ item.score }}</div>
-          </div>
-          <div class="field_item">
-            <div class="field_icon">
-              <img src="../assets/image/Phone.png" alt="" />
-            </div>
-            <div class="field_name">{{ item.phone }}</div>
-          </div>
-          <div class="field_item">
-            <div class="field_icon">
-              <img src="../assets/image/fa-regular_address-book.png" alt="" />
-            </div>
-            <div class="field_name">Địa chỉ</div>
-          </div>
-        </div>
-      </div>
         </div>
       </div>
     </div>
@@ -215,15 +218,15 @@
           <div>Tên người dùng</div>
           <input type="text" />
           <div>Email</div>
-          <input type="text" v-model="newUser.email"/>
+          <input type="text" v-model="newUser.email" />
           <div>Số điện thoại</div>
-          <input type="text" v-model="newUser.phone"/>
+          <input type="text" v-model="newUser.phone" />
           <div>Số CMND</div>
           <input type="text" />
         </div>
         <div>
           <div>Họ và tên</div>
-          <input type="text" v-model="newUser.name"/>
+          <input type="text" v-model="newUser.name" />
           <div>Password</div>
           <input type="password" />
           <div>Địa chỉ</div>
@@ -233,8 +236,36 @@
         </div>
       </div>
       <div>
-        <button style="background-color: blue;margin-top: 30px;margin-left: 5%;border-radius: 7px;width: 70px;height: 30px;text-align: center;color:white;" @click="addUser">Lưu trữ</button>
-        <button style="background-color: rgb(216,216,216);margin-top: 30px;margin-left: 5%;border-radius: 7px;width: 70px;height: 30px;text-align: center;color:white;" @click="isAdd = 0">Đóng</button>
+        <button
+          style="
+            background-color: blue;
+            margin-top: 30px;
+            margin-left: 5%;
+            border-radius: 7px;
+            width: 70px;
+            height: 30px;
+            text-align: center;
+            color: white;
+          "
+          @click="addUser"
+        >
+          Lưu trữ
+        </button>
+        <button
+          style="
+            background-color: rgb(216, 216, 216);
+            margin-top: 30px;
+            margin-left: 5%;
+            border-radius: 7px;
+            width: 70px;
+            height: 30px;
+            text-align: center;
+            color: white;
+          "
+          @click="isAdd = 0"
+        >
+          Đóng
+        </button>
       </div>
     </div>
   </div>
@@ -250,14 +281,14 @@ export default {
       task: [1, 0],
       list_task: [1, 0],
       isAdd: 0,
-      curUser:"",
+      curUser: "",
       searchNum: "",
-      newUser:{
-        name:"",
-        phone:"",
-        email:"",
-        date:"",
-        score:""
+      newUser: {
+        name: "",
+        phone: "",
+        email: "",
+        date: "",
+        score: "",
       },
       info_field: [
         {
@@ -288,33 +319,33 @@ export default {
       this.list_task = [0, 0];
       this.list_task[params] = 1;
     },
-    showUserInfo(id){
+    showUserInfo(id) {
       this.curUser = id;
     },
-    addUser(){
-      // this.users.push({STT:17,name:this.newUser.name,phone:this.newUser.phone,email:this.newUser.email,date:'jidiuahsdu',score:192})
-      axios.post('https://api.npoint.io/cabc3cd41304f9512ff2', {
-        STT: this.users.STT,
-        name: this.users.name,
-        phone: this.users.phone,
-        email: this.users.email,
-        date: this.users.date,
-        score: this.users.score
-      })
-      .then(function (response) {
-        this.isAdd = 0;
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-      
-    }
+    addUser() {
+      // this.users.push({"STT":17,"name":this.newUser.name,"phone":this.newUser.phone,"email":this.newUser.email,"date":'jidiuahsdu',"score":192})
+      axios
+        .post("https://api.npoint.io/553f7ce1ce02b0193a0a", {
+          STT: this.users.STT,
+          name: this.users.name,
+          phone: this.users.phone,
+          email: this.users.email,
+          date: this.users.date,
+          score: this.users.score,
+        })
+        .then(function (response) {
+          this.isAdd = 0;
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
   },
   mounted() {
     var self = this;
     axios
-      .get("https://api.npoint.io/cabc3cd41304f9512ff2")
+      .get("https://api.npoint.io/553f7ce1ce02b0193a0a")
       .then((response) => {
         self.users = response.data;
       })
@@ -325,15 +356,15 @@ export default {
 };
 </script>
 <style scoped>
-.searchResult{
-  margin-left:5%;
-  margin-top:25px;
-  margin-bottom:5px;
+.searchResult {
+  margin-left: 5%;
+  margin-top: 25px;
+  margin-bottom: 5px;
   color: orange;
 }
-.resultText{
-  margin-left:5%;
-  margin-top:15px;
+.resultText {
+  margin-left: 5%;
+  margin-top: 15px;
 }
 .search_input {
   border: none;
@@ -341,27 +372,27 @@ export default {
   outline: none;
   font-size: 15px;
 }
-.searchBox>.searchBox_input>img {
-  width:20px;
-  height:20px;
-  margin-right:10px;
+.searchBox > .searchBox_input > img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
 }
-.searchBox>.searchBox_input {
+.searchBox > .searchBox_input {
   display: flex;
   border: 1px solid black;
   border-radius: 5px;
-  width:90%;
-  margin-left:5%;
-  margin-top:15px;
-  padding:5px;
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 15px;
+  padding: 5px;
 }
 
-.add_user_field>div>div>input {
+.add_user_field > div > div > input {
   margin-bottom: 11px;
   height: 1.5rem;
   width: 200px;
   border-radius: 7px;
-  padding-left:10px;
+  padding-left: 10px;
 }
 .add_user_back {
   position: fixed;
