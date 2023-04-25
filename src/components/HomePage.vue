@@ -104,7 +104,7 @@
         </div>
         <div class="resultText">Kết quả tìm kiếm danh bạ</div>
         <div class="searchResult" v-for="item in users" :key="item.STT">
-          <div v-if="item.phone == searchNum">
+          <div v-if="item.phone == searchNum" @click="showUserInfo(item.STT)">
             {{ item.name }}
           </div>
         </div>
@@ -147,7 +147,15 @@
       </div>
     </div>
     <div class="search_user_info" v-if="task[1] == 1">
-    
+      <div v-for="item in users" :key="item.STT">
+        <div v-if="item.STT == curUser">
+          <div>{{ item.name }}</div>
+          <div>{{ item.phone }}</div>
+          <div>{{ item.email }}</div>
+          <div>{{ item.date }}</div>
+          <div>{{ item.score }}</div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="add_user_form" v-if="isAdd == 1">
@@ -211,6 +219,7 @@ export default {
       task: [1, 0],
       list_task: [1, 0],
       isAdd: 0,
+      curUser:"",
       searchNum: "",
       newUser:{
         name:"",
@@ -247,6 +256,9 @@ export default {
     taskChoosed(params) {
       this.list_task = [0, 0];
       this.list_task[params] = 1;
+    },
+    showUserInfo(id){
+      this.curUser = id;
     },
     addUser(){
       // this.users.push({STT:17,name:this.newUser.name,phone:this.newUser.phone,email:this.newUser.email,date:'jidiuahsdu',score:192})
